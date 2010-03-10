@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - added [PodSpellingTests]
+    - added [KwaliteeTests]
 
 1.100690  2010-03-10 17:03:56 Europe/Vienna
     - initial version

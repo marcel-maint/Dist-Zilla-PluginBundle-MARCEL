@@ -18,6 +18,7 @@ use Dist::Zilla::Plugin::CompileTests 1.100220;
 use Dist::Zilla::Plugin::CriticTests;
 use Dist::Zilla::Plugin::ExtraTests;
 use Dist::Zilla::Plugin::InstallDirs;
+use Dist::Zilla::Plugin::KwaliteeTests;
 use Dist::Zilla::Plugin::License;
 use Dist::Zilla::Plugin::Manifest;
 use Dist::Zilla::Plugin::ManifestSkip;
@@ -29,6 +30,7 @@ use Dist::Zilla::Plugin::MakeMaker;
 use Dist::Zilla::Plugin::NextRelease;
 use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodTests;
+use Dist::Zilla::Plugin::PodSpellingTests;
 use Dist::Zilla::Plugin::PodWeaver;
 use Dist::Zilla::Plugin::PruneCruft;
 use Dist::Zilla::Plugin::ReadmeFromPod;
@@ -75,11 +77,13 @@ sub bundle_config {
         ],
 
         # -- fetch & generate files
-        [ AllFiles     => {} ],
-        [ CompileTests => $compile_params ],
-        [ CriticTests  => {} ],
-        [ MetaTests    => {} ],
-        [ PodTests     => {} ],
+        [ AllFiles         => {} ],
+        [ CompileTests     => $compile_params ],
+        [ CriticTests      => {} ],
+        [ MetaTests        => {} ],
+        [ PodTests         => {} ],
+        [ PodSpellingTests => {} ],
+        [ KwaliteeTests    => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -164,6 +168,8 @@ equivalent to:
     [CriticTests]
     [MetaTests]
     [PodTests]
+    [PodSpellingTests]
+    [KwaliteeTests]
 
     ; -- remove some files
     [PruneCruft]

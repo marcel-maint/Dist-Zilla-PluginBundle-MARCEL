@@ -13,6 +13,7 @@ use Moose::Autobox;
 use Dist::Zilla::Plugin::AllFiles;
 use Dist::Zilla::Plugin::AutoPrereq;
 use Dist::Zilla::Plugin::AutoVersion;
+use Dist::Zilla::Plugin::Bugtracker;
 use Dist::Zilla::Plugin::CheckChangeLog;
 use Dist::Zilla::Plugin::CheckChangesTests;
 use Dist::Zilla::Plugin::CompileTests 1.100220;
@@ -108,6 +109,7 @@ sub bundle_config {
 
         # -- gather metadata
         [ Repository => {} ],
+        [ Bugtracker => {} ],
 
         # -- munge files
         [ ExtraTests  => {} ],
@@ -211,6 +213,7 @@ equivalent to:
 
     ; -- gather metadata
     [Repository]
+    [Bugtracker]
 
     ; -- munge files
     [ExtraTests]

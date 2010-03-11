@@ -21,6 +21,7 @@ use Dist::Zilla::Plugin::CriticTests;
 use Dist::Zilla::Plugin::DistManifestTests;
 use Dist::Zilla::Plugin::ExtraTests;
 use Dist::Zilla::Plugin::HasVersionTests;
+use Dist::Zilla::Plugin::Homepage;
 use Dist::Zilla::Plugin::InstallDirs;
 use Dist::Zilla::Plugin::InlineFilesMARCEL;
 use Dist::Zilla::Plugin::KwaliteeTests;
@@ -110,6 +111,7 @@ sub bundle_config {
         # -- gather metadata
         [ Repository => {} ],
         [ Bugtracker => {} ],
+        [ Homepage   => {} ],
 
         # -- munge files
         [ ExtraTests  => {} ],
@@ -214,6 +216,7 @@ equivalent to:
     ; -- gather metadata
     [Repository]
     [Bugtracker]
+    [Homepage]
 
     ; -- munge files
     [ExtraTests]

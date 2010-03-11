@@ -11,6 +11,7 @@ Revision history for Perl extension {{$dist->name}}
     - added [DistManfestTests]
     - added [InlineFilesMARCEL]
     - added [Bugtracker]
+    - added [Homepage]
 
 1.100690  2010-03-10 17:03:56 Europe/Vienna
     - initial version

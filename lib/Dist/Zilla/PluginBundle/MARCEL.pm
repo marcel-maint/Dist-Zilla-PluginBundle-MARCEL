@@ -21,6 +21,7 @@ use Dist::Zilla::Plugin::DistManifestTests;
 use Dist::Zilla::Plugin::ExtraTests;
 use Dist::Zilla::Plugin::HasVersionTests;
 use Dist::Zilla::Plugin::InstallDirs;
+use Dist::Zilla::Plugin::InlineFilesMARCEL;
 use Dist::Zilla::Plugin::KwaliteeTests;
 use Dist::Zilla::Plugin::License;
 use Dist::Zilla::Plugin::Manifest;
@@ -96,6 +97,7 @@ sub bundle_config {
         [ HasVersionTests     => {} ],
         [ CheckChangesTests   => {} ],
         [ DistManifestTests   => {} ],
+        [ InlineFilesMARCEL   => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -198,6 +200,7 @@ equivalent to:
     [HasVersionTests]
     [CheckChangesTests]
     [DistManifestTests]
+    [InlineFilesMARCEL]
 
     ; -- remove some files
     [PruneCruft]

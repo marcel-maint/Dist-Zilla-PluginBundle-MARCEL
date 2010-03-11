@@ -9,6 +9,7 @@ Revision history for Perl extension {{$dist->name}}
     - added [HasVersionTests]
     - added [CheckChangesTests]
     - added [DistManfestTests]
+    - added [InlineFilesMARCEL]
 
 1.100690  2010-03-10 17:03:56 Europe/Vienna
     - initial version

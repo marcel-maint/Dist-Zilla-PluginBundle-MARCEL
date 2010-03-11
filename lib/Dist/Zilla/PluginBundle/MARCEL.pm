@@ -43,6 +43,7 @@ use Dist::Zilla::Plugin::PodWeaver;
 use Dist::Zilla::Plugin::PortabilityTests;
 use Dist::Zilla::Plugin::PruneCruft;
 use Dist::Zilla::Plugin::ReadmeFromPod;
+use Dist::Zilla::Plugin::ReportVersions;
 use Dist::Zilla::Plugin::Repository;
 use Dist::Zilla::Plugin::SynopsisTests;
 use Dist::Zilla::Plugin::TaskWeaver;
@@ -101,6 +102,7 @@ sub bundle_config {
         [ CheckChangesTests   => {} ],
         [ DistManifestTests   => {} ],
         [ InlineFilesMARCEL   => {} ],
+        [ ReportVerions       => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -207,6 +209,7 @@ equivalent to:
     [CheckChangesTests]
     [DistManifestTests]
     [InlineFilesMARCEL]
+    [ReportVerions]
 
     ; -- remove some files
     [PruneCruft]

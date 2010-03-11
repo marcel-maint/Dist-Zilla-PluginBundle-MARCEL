@@ -17,6 +17,7 @@ use Dist::Zilla::Plugin::CheckChangeLog;
 use Dist::Zilla::Plugin::CompileTests 1.100220;
 use Dist::Zilla::Plugin::CriticTests;
 use Dist::Zilla::Plugin::ExtraTests;
+use Dist::Zilla::Plugin::HasVersionTests;
 use Dist::Zilla::Plugin::InstallDirs;
 use Dist::Zilla::Plugin::KwaliteeTests;
 use Dist::Zilla::Plugin::License;
@@ -90,6 +91,7 @@ sub bundle_config {
         [ PortabilityTests    => {} ],
         [ SynopsisTests       => {} ],
         [ MinimumVersionTests => {} ],
+        [ HasVersionTests     => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -189,6 +191,7 @@ equivalent to:
     [PortabilityTests]
     [SynopsisTests]
     [MinimumVersionTests]
+    [HasVersionTests]
 
     ; -- remove some files
     [PruneCruft]

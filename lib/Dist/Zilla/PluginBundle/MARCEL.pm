@@ -32,9 +32,11 @@ use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodTests;
 use Dist::Zilla::Plugin::PodSpellingTests;
 use Dist::Zilla::Plugin::PodWeaver;
+use Dist::Zilla::Plugin::PortabilityTests;
 use Dist::Zilla::Plugin::PruneCruft;
 use Dist::Zilla::Plugin::ReadmeFromPod;
 use Dist::Zilla::Plugin::Repository;
+use Dist::Zilla::Plugin::SynopsisTests;
 use Dist::Zilla::Plugin::TaskWeaver;
 use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
@@ -84,6 +86,8 @@ sub bundle_config {
         [ PodTests         => {} ],
         [ PodSpellingTests => {} ],
         [ KwaliteeTests    => {} ],
+        [ PortabilityTests => {} ],
+        [ SynopsisTests    => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -146,6 +150,16 @@ no Moose;
 
 =pod
 
+=begin :prelude
+
+=for test_synopsis
+1;
+__END__
+
+=for stopwords AutoPrereq AutoVersion CompileTests PodWeaver TaskWeaver
+
+=end :prelude
+
 =head1 SYNOPSIS
 
 In your F<dist.ini>:
@@ -170,6 +184,8 @@ equivalent to:
     [PodTests]
     [PodSpellingTests]
     [KwaliteeTests]
+    [PortabilityTests]
+    [SynopsisTests]
 
     ; -- remove some files
     [PruneCruft]

@@ -102,7 +102,7 @@ sub bundle_config {
         [ CheckChangesTests   => {} ],
         [ DistManifestTests   => {} ],
         [ InlineFilesMARCEL   => {} ],
-        [ ReportVerions       => {} ],
+        [ ReportVersions      => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -209,7 +209,7 @@ equivalent to:
     [CheckChangesTests]
     [DistManifestTests]
     [InlineFilesMARCEL]
-    [ReportVerions]
+    [ReportVersions]
 
     ; -- remove some files
     [PruneCruft]

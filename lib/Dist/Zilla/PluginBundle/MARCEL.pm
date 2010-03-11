@@ -27,6 +27,7 @@ use Dist::Zilla::Plugin::MetaYAML;
 use Dist::Zilla::Plugin::MetaJSON;
 use Dist::Zilla::Plugin::MetaTests;
 use Dist::Zilla::Plugin::MakeMaker;
+use Dist::Zilla::Plugin::MinimumVersionTests;
 use Dist::Zilla::Plugin::NextRelease;
 use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodTests;
@@ -79,15 +80,16 @@ sub bundle_config {
         ],
 
         # -- fetch & generate files
-        [ AllFiles         => {} ],
-        [ CompileTests     => $compile_params ],
-        [ CriticTests      => {} ],
-        [ MetaTests        => {} ],
-        [ PodTests         => {} ],
-        [ PodSpellingTests => {} ],
-        [ KwaliteeTests    => {} ],
-        [ PortabilityTests => {} ],
-        [ SynopsisTests    => {} ],
+        [ AllFiles            => {} ],
+        [ CompileTests        => $compile_params ],
+        [ CriticTests         => {} ],
+        [ MetaTests           => {} ],
+        [ PodTests            => {} ],
+        [ PodSpellingTests    => {} ],
+        [ KwaliteeTests       => {} ],
+        [ PortabilityTests    => {} ],
+        [ SynopsisTests       => {} ],
+        [ MinimumVersionTests => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -186,6 +188,7 @@ equivalent to:
     [KwaliteeTests]
     [PortabilityTests]
     [SynopsisTests]
+    [MinimumVersionTests]
 
     ; -- remove some files
     [PruneCruft]

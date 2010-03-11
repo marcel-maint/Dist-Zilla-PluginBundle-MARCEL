@@ -7,6 +7,7 @@ Revision history for Perl extension {{$dist->name}}
     - added [SynopsisTests]
     - added [MinimumVersionTests]
     - added [HasVersionTests]
+    - added [CheckChangesTests]
 
 1.100690  2010-03-10 17:03:56 Europe/Vienna
     - initial version

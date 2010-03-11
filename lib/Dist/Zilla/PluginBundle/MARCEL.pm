@@ -14,6 +14,7 @@ use Dist::Zilla::Plugin::AllFiles;
 use Dist::Zilla::Plugin::AutoPrereq;
 use Dist::Zilla::Plugin::AutoVersion;
 use Dist::Zilla::Plugin::CheckChangeLog;
+use Dist::Zilla::Plugin::CheckChangesTests;
 use Dist::Zilla::Plugin::CompileTests 1.100220;
 use Dist::Zilla::Plugin::CriticTests;
 use Dist::Zilla::Plugin::ExtraTests;
@@ -92,6 +93,7 @@ sub bundle_config {
         [ SynopsisTests       => {} ],
         [ MinimumVersionTests => {} ],
         [ HasVersionTests     => {} ],
+        [ CheckChangesTests   => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -192,6 +194,7 @@ equivalent to:
     [SynopsisTests]
     [MinimumVersionTests]
     [HasVersionTests]
+    [CheckChangesTests]
 
     ; -- remove some files
     [PruneCruft]

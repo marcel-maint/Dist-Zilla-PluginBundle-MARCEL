@@ -23,6 +23,7 @@ use Dist::Zilla::Plugin::ExtraTests;
 use Dist::Zilla::Plugin::HasVersionTests;
 use Dist::Zilla::Plugin::Homepage;
 use Dist::Zilla::Plugin::InstallDirs;
+use Dist::Zilla::Plugin::InstallGuide;
 use Dist::Zilla::Plugin::InlineFilesMARCEL;
 use Dist::Zilla::Plugin::KwaliteeTests;
 use Dist::Zilla::Plugin::License;
@@ -129,6 +130,7 @@ sub bundle_config {
         [ MetaYAML      => {} ],
         [ MetaJSON      => {} ],
         [ ReadmeFromPod => {} ],
+        [ InstallGuide  => {} ],
         [ Manifest      => {} ], # should come last
 
         # -- release
@@ -234,6 +236,7 @@ equivalent to:
     [MetaYAML]
     [MetaJSON]
     [ReadmeFromPod]
+    [InstallGuide]
     [Manifest] ; should come last
 
     ; -- release

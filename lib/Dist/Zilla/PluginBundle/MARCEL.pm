@@ -3,8 +3,8 @@ use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::MARCEL;
-# ABSTRACT: build and release a distribution like MARCEL
 
+# ABSTRACT: build and release a distribution like me
 use Class::MOP;
 use Moose;
 use Moose::Autobox;
@@ -49,36 +49,39 @@ use Dist::Zilla::Plugin::SynopsisTests;
 use Dist::Zilla::Plugin::TaskWeaver;
 use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
-
 with 'Dist::Zilla::Role::PluginBundle';
 
 sub bundle_config {
     my ($self, $section) = @_;
     my $class = ref($self) || $self;
-    my $arg   = $section->{payload};
+    my $arg = $section->{payload};
 
     # params for AutoVersion
-    my $major_version  = defined $arg->{major_version} ? $arg->{major_version} : 1;
+    my $major_version =
+      defined $arg->{major_version} ? $arg->{major_version} : 1;
     my $version_format =
-          q<{{ $major }}.{{ cldr('yyDDD') }}>
-        . sprintf('%01u', ($ENV{N} || 0))
-        . ($ENV{DEV} ? (sprintf '_%03u', $ENV{DEV}) : '');
+        q<{{ $major }}.{{ cldr('yyDDD') }}>
+      . sprintf('%01u', ($ENV{N} || 0))
+      . ($ENV{DEV} ? (sprintf '_%03u', $ENV{DEV}) : '');
 
     # params for autoprereq
-    my $prereq_params = defined $arg->{skip_prereq}
-        ? { skip => $arg->{skip_prereq} }
-        : {};
+    my $prereq_params =
+      defined $arg->{skip_prereq}
+      ? { skip => $arg->{skip_prereq} }
+      : {};
 
     # params for compiletests
-    my $compile_params = defined $arg->{fake_home}
-        ? { fake_home => $arg->{fake_home} }
-        : {};
+    my $compile_params =
+      defined $arg->{fake_home}
+      ? { fake_home => $arg->{fake_home} }
+      : {};
 
     # params for pod weaver
     $arg->{weaver} ||= 'pod';
 
     # long list of plugins
     my @wanted = (
+
         # -- static meta-information
         [   AutoVersion => {
                 major     => $major_version,
@@ -120,7 +123,11 @@ sub bundle_config {
         [ ExtraTests  => {} ],
         [ NextRelease => {} ],
         [ PkgVersion  => {} ],
-        [ ( $arg->{weaver} eq 'task' ? 'TaskWeaver' : 'PodWeaver' ) => {} ],
+
+        (   $arg->{weaver} eq 'task'
+            ? [ 'TaskWeaver' => {} ]
+            : [ 'PodWeaver' => { config_plugin => '@MARCEL' } ]
+        ),
 
         # -- dynamic meta-information
         [ InstallDirs             => {} ],
@@ -133,12 +140,13 @@ sub bundle_config {
         [ MetaJSON      => {} ],
         [ ReadmeFromPod => {} ],
         [ InstallGuide  => {} ],
-        [ Manifest      => {} ], # should come last
+        [ Manifest      => {} ],    # should come last
 
         # -- release
         [ CheckChangeLog => {} ],
+
         #[ @Git],
-        [ UploadToCPAN   => {} ],
+        [ UploadToCPAN => {} ],
     );
 
     # create list of plugins
@@ -146,25 +154,22 @@ sub bundle_config {
     for my $wanted (@wanted) {
         my ($name, $arg) = @$wanted;
         my $class = "Dist::Zilla::Plugin::$name";
-        Class::MOP::load_class($class); # make sure plugin exists
+        Class::MOP::load_class($class);    # make sure plugin exists
         push @plugins, [ "$section->{name}/$name" => $class => $arg ];
     }
 
     # add git plugins
-    my @gitplugins = Dist::Zilla::PluginBundle::Git->bundle_config( {
-        name    => "$section->{name}/Git",
-        payload => { },
-    } );
+    my @gitplugins = Dist::Zilla::PluginBundle::Git->bundle_config(
+        {   name    => "$section->{name}/Git",
+            payload => {},
+        }
+    );
     push @plugins, @gitplugins;
-
     return @plugins;
 }
-
-
 __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
-
 
 =pod
 

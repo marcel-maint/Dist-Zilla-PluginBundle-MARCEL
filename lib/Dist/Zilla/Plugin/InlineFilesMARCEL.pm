@@ -79,6 +79,7 @@ COVER.SKIP
 CPAN.SKIP
 t/000_standard__*
 Debian_CPANTS.txt
+nytprof.out
 
 # Temp, old, emacs, vim, backup files.
 ~$

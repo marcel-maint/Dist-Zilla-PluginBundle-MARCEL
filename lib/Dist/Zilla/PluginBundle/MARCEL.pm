@@ -47,6 +47,7 @@ use Dist::Zilla::Plugin::ReportVersions;
 use Dist::Zilla::Plugin::Repository;
 use Dist::Zilla::Plugin::SynopsisTests;
 use Dist::Zilla::Plugin::TaskWeaver;
+use Dist::Zilla::Plugin::UnusedVarsTests;
 use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
 with 'Dist::Zilla::Role::PluginBundle';
@@ -104,6 +105,7 @@ sub bundle_config {
         [ HasVersionTests     => {} ],
         [ CheckChangesTests   => {} ],
         [ DistManifestTests   => {} ],
+        [ UnusedVarsTests     => {} ],
         [ InlineFilesMARCEL   => {} ],
         [ ReportVersions      => {} ],
 
@@ -213,6 +215,7 @@ equivalent to:
     [HasVersionTests]
     [CheckChangesTests]
     [DistManifestTests]
+    [UnusedVarsTests]
     [InlineFilesMARCEL]
     [ReportVersions]
 

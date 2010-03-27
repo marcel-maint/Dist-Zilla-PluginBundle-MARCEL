@@ -14,6 +14,8 @@ Revision history for Perl extension {{$dist->name}}
     - added [Homepage]
     - added [InstallGuide]
     - added [ReportVersions]
+    - added [UnusedVarsTests]
+    - [InlineFilesMARCEL] adds nytprof.out to MANIFEST.SKIP
 
 1.100690  2010-03-10 17:03:56 Europe/Vienna
     - initial version

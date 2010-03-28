@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::InlineFilesMARCEL;
-# ABSTRACT: write static files that I always use
+# ABSTRACT: Write static files that I always use
 use Moose;
 use Test::Synopsis;
 extends 'Dist::Zilla::Plugin::InlineFiles';
@@ -54,10 +54,10 @@ allow = refs
 
 ___[ MANIFEST.SKIP ]___
 # Version control files and dirs.
-\bRCS\b
-\bCVS\b
-\.svn
-\.git
+\\bRCS\b
+\\bCVS\b
+\\.svn
+\\.git
 ,v$
 
 # Makemaker/Build.PL generated files and dirs.
@@ -83,10 +83,10 @@ nytprof.out
 
 # Temp, old, emacs, vim, backup files.
 ~$
-\.old$
-\.swp$
-\.tar$
-\.tar\.gz$
+\\.old$
+\\.swp$
+\\.tar$
+\\.tar\.gz$
 ^#.*#$
 ^\.#
 .shipit

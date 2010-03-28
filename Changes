@@ -16,6 +16,7 @@ Revision history for Perl extension {{$dist->name}}
     - added [ReportVersions]
     - added [UnusedVarsTests]
     - [InlineFilesMARCEL] adds nytprof.out to MANIFEST.SKIP
+    - [InlineFilesMARCEL]: fixed backslashes in MANIFEST.SKIP
 
 1.100690  2010-03-10 17:03:56 Europe/Vienna
     - initial version

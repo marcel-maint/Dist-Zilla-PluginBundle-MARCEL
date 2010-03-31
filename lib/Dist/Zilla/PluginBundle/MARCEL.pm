@@ -10,7 +10,6 @@ use Moose;
 use Moose::Autobox;
 
 # plugins used
-use Dist::Zilla::Plugin::AllFiles;
 use Dist::Zilla::Plugin::AutoPrereq;
 use Dist::Zilla::Plugin::AutoVersion;
 use Dist::Zilla::Plugin::Bugtracker;
@@ -20,9 +19,10 @@ use Dist::Zilla::Plugin::CompileTests 1.100220;
 use Dist::Zilla::Plugin::CriticTests;
 use Dist::Zilla::Plugin::DistManifestTests;
 use Dist::Zilla::Plugin::ExtraTests;
+use Dist::Zilla::Plugin::GatherDir;
 use Dist::Zilla::Plugin::HasVersionTests;
 use Dist::Zilla::Plugin::Homepage;
-use Dist::Zilla::Plugin::InstallDirs;
+use Dist::Zilla::Plugin::ExecDir;
 use Dist::Zilla::Plugin::InstallGuide;
 use Dist::Zilla::Plugin::InlineFilesMARCEL;
 use Dist::Zilla::Plugin::KwaliteeTests;
@@ -37,7 +37,8 @@ use Dist::Zilla::Plugin::MakeMaker;
 use Dist::Zilla::Plugin::MinimumVersionTests;
 use Dist::Zilla::Plugin::NextRelease;
 use Dist::Zilla::Plugin::PkgVersion;
-use Dist::Zilla::Plugin::PodTests;
+use Dist::Zilla::Plugin::PodCoverageTests;
+use Dist::Zilla::Plugin::PodSyntaxTests;
 use Dist::Zilla::Plugin::PodSpellingTests;
 use Dist::Zilla::Plugin::PodWeaver;
 use Dist::Zilla::Plugin::PortabilityTests;
@@ -45,6 +46,7 @@ use Dist::Zilla::Plugin::PruneCruft;
 use Dist::Zilla::Plugin::ReadmeFromPod;
 use Dist::Zilla::Plugin::ReportVersions;
 use Dist::Zilla::Plugin::Repository;
+use Dist::Zilla::Plugin::ShareDir;
 use Dist::Zilla::Plugin::SynopsisTests;
 use Dist::Zilla::Plugin::TaskWeaver;
 use Dist::Zilla::Plugin::UnusedVarsTests;
@@ -92,11 +94,12 @@ sub bundle_config {
         ],
 
         # -- fetch & generate files
-        [ AllFiles            => {} ],
+        [ GatherDir           => {} ],
         [ CompileTests        => $compile_params ],
         [ CriticTests         => {} ],
         [ MetaTests           => {} ],
-        [ PodTests            => {} ],
+        [ PodCoverageTests    => {} ],
+        [ PodSyntaxTests      => {} ],
         [ PodSpellingTests    => {} ],
         [ KwaliteeTests       => {} ],
         [ PortabilityTests    => {} ],
@@ -132,7 +135,8 @@ sub bundle_config {
         ),
 
         # -- dynamic meta-information
-        [ InstallDirs             => {} ],
+        [ ExecDir                 => {} ],
+        [ ShareDir                => {} ],
         [ 'MetaProvides::Package' => {} ],
 
         # -- generate meta files
@@ -202,11 +206,12 @@ equivalent to:
     [AutoVersion]
 
     ; -- fetch & generate files
-    [AllFiles]
+    [GatherDir]
     [CompileTests]
     [CriticTests]
     [MetaTests]
-    [PodTests]
+    [PodCoverageTests]
+    [PodSyntaxTests]
     [PodSpellingTests]
     [KwaliteeTests]
     [PortabilityTests]
@@ -238,7 +243,8 @@ equivalent to:
     [PodWeaver]
 
     ; -- dynamic meta-information
-    [InstallDirs]
+    [ExecDir]
+    [ShareDir]
     [MetaProvides::Package]
 
     ; -- generate meta files

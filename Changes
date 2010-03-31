@@ -17,6 +17,8 @@ Revision history for Perl extension {{$dist->name}}
     - added [UnusedVarsTests]
     - [InlineFilesMARCEL] adds nytprof.out to MANIFEST.SKIP
     - [InlineFilesMARCEL]: fixed backslashes in MANIFEST.SKIP
+    - made it compatible with Dist::Zilla v2 (with regards to [AllFiles],
+      [PodTests], [InstallDirs]
 
 1.100690  2010-03-10 17:03:56 Europe/Vienna
     - initial version

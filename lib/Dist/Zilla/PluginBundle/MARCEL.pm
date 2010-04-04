@@ -89,7 +89,7 @@ sub bundle_config {
         [   AutoVersion => {
                 major     => $major_version,
                 format    => $version_format,
-                time_zone => 'Europe/Paris',
+                time_zone => 'Europe/Vienna',
             }
         ],
 

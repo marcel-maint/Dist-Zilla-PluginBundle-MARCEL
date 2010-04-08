@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - configure Git plugins manually instead of via [@Git] since I don't use
+      Git::Push anymore (for now)
 
 1.100950  2010-04-05 00:33:19 Europe/Vienna
     - added [PodSpellingTests]

@@ -152,7 +152,10 @@ sub bundle_config {
         [ CheckChangeLog => {} ],
 
         #[ @Git],
-        [ UploadToCPAN => {} ],
+        [ 'Git::Check'  => {} ],
+        [ 'Git::Commit' => {} ],
+        [ 'Git::Tag'    => {} ],
+        [ UploadToCPAN  => {} ],
     );
 
     # create list of plugins
@@ -165,12 +168,13 @@ sub bundle_config {
     }
 
     # add git plugins
-    my @gitplugins = Dist::Zilla::PluginBundle::Git->bundle_config(
-        {   name    => "$section->{name}/Git",
-            payload => {},
-        }
-    );
-    push @plugins, @gitplugins;
+    # my @gitplugins = Dist::Zilla::PluginBundle::Git->bundle_config(
+    #     {   name    => "$section->{name}/Git",
+    #         payload => {},
+    #     }
+    # );
+    # push @plugins, @gitplugins;
+
     return @plugins;
 }
 __PACKAGE__->meta->make_immutable;
@@ -258,7 +262,9 @@ equivalent to:
 
     ; -- release
     [CheckChangeLog]
-    [@Git]
+    [Git::Check]
+    [Git::Commit]
+    [Git::Tag]
     [UploadToCPAN]
 
 The following options are accepted:

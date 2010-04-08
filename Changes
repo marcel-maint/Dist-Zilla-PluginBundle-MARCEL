@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.100980  2010-04-08 16:37:19 Europe/Vienna
     - configure Git plugins manually instead of via [@Git] since I don't use
       Git::Push anymore (for now)
 

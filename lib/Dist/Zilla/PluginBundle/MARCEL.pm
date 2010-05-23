@@ -4,7 +4,7 @@ use warnings;
 
 package Dist::Zilla::PluginBundle::MARCEL;
 
-# ABSTRACT: build and release a distribution like me
+# ABSTRACT: Build and release a distribution like MARCEL
 use Class::MOP;
 use Moose;
 use Moose::Autobox;
@@ -152,9 +152,6 @@ sub bundle_config {
         [ CheckChangeLog => {} ],
 
         #[ @Git],
-        [ 'Git::Check'  => {} ],
-        [ 'Git::Commit' => {} ],
-        [ 'Git::Tag'    => {} ],
         [ UploadToCPAN  => {} ],
     );
 
@@ -168,12 +165,12 @@ sub bundle_config {
     }
 
     # add git plugins
-    # my @gitplugins = Dist::Zilla::PluginBundle::Git->bundle_config(
-    #     {   name    => "$section->{name}/Git",
-    #         payload => {},
-    #     }
-    # );
-    # push @plugins, @gitplugins;
+    my @gitplugins = Dist::Zilla::PluginBundle::Git->bundle_config(
+        {   name    => "$section->{name}/Git",
+            payload => {},
+        }
+    );
+    push @plugins, @gitplugins;
 
     return @plugins;
 }
@@ -262,9 +259,7 @@ equivalent to:
 
     ; -- release
     [CheckChangeLog]
-    [Git::Check]
-    [Git::Commit]
-    [Git::Tag]
+    [@Git]
     [UploadToCPAN]
 
 The following options are accepted:

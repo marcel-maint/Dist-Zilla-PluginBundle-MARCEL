@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.101520  2010-06-01 12:43:26 Europe/Vienna
     - go back to using [@Git]
 
 1.100980  2010-04-08 16:37:19 Europe/Vienna

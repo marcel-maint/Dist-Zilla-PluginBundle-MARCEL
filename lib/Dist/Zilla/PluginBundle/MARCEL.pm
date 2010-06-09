@@ -43,6 +43,7 @@ use Dist::Zilla::Plugin::PodSpellingTests;
 use Dist::Zilla::Plugin::PodWeaver;
 use Dist::Zilla::Plugin::PortabilityTests;
 use Dist::Zilla::Plugin::PruneCruft;
+use Dist::Zilla::Plugin::PruneFiles;
 use Dist::Zilla::Plugin::ReadmeFromPod;
 use Dist::Zilla::Plugin::ReportVersions;
 use Dist::Zilla::Plugin::Repository;
@@ -114,6 +115,7 @@ sub bundle_config {
 
         # -- remove some files
         [ PruneCruft   => {} ],
+        [ PruneFiles   => { filenames => [ qw(dist.ini) ] } ],
         [ ManifestSkip => {} ],
 
         # -- get prereqs
@@ -227,6 +229,9 @@ equivalent to:
 
     ; -- remove some files
     [PruneCruft]
+    [PruneFiles]
+    filenames = dist.ini
+
     [ManifestSkip]
 
     ; -- get prereqs

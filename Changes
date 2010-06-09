@@ -1,6 +1,7 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - added [PruneFiles] to prune 'dist.ini'
 
 1.101520  2010-06-01 12:43:26 Europe/Vienna
     - go back to using [@Git]

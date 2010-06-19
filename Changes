@@ -1,6 +1,7 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - added [NoTabsTests]
 
 1.101600  2010-06-09 13:35:00 Europe/Vienna
     - added [PruneFiles] to prune 'dist.ini'

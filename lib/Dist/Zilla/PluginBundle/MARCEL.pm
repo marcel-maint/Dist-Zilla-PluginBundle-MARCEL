@@ -36,6 +36,7 @@ use Dist::Zilla::Plugin::MetaTests;
 use Dist::Zilla::Plugin::MakeMaker;
 use Dist::Zilla::Plugin::MinimumVersionTests;
 use Dist::Zilla::Plugin::NextRelease;
+use Dist::Zilla::Plugin::NoTabsTests;
 use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodCoverageTests;
 use Dist::Zilla::Plugin::PodSyntaxTests;
@@ -110,6 +111,7 @@ sub bundle_config {
         [ CheckChangesTests   => {} ],
         [ DistManifestTests   => {} ],
         [ UnusedVarsTests     => {} ],
+        [ NoTabsTests         => {} ],
         [ InlineFilesMARCEL   => {} ],
         [ ReportVersions      => {} ],
 
@@ -224,6 +226,7 @@ equivalent to:
     [CheckChangesTests]
     [DistManifestTests]
     [UnusedVarsTests]
+    [NoTabsTests]
     [InlineFilesMARCEL]
     [ReportVersions]
 

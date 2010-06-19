@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.101700  2010-06-19 11:02:49 Europe/Vienna
     - added [NoTabsTests]
 
 1.101600  2010-06-09 13:35:00 Europe/Vienna

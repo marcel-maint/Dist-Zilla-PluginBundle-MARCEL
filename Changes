@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.102630  2010-09-20 23:53:37 Europe/Vienna
     - explicitly used Pod::Weaver::PluginBundle::MARCEL to make it a prereq
     - used [AutoPrereqs] instead of [AutoPrereq] for Dist::Zilla v5
     - slightly improved docs

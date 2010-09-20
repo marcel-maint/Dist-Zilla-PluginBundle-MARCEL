@@ -183,8 +183,6 @@ __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
 
-=pod
-
 =begin :prelude
 
 =for test_synopsis

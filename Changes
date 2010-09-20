@@ -1,6 +1,9 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - explicitly used Pod::Weaver::PluginBundle::MARCEL to make it a prereq
+    - used [AutoPrereqs] instead of [AutoPrereq] for Dist::Zilla v5
+    - slightly improved docs
 
 1.101700  2010-06-19 11:02:49 Europe/Vienna
     - added [NoTabsTests]

@@ -56,6 +56,8 @@ use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
 with 'Dist::Zilla::Role::PluginBundle';
 
+sub mvp_multivalue_args { qw(weaver_finder) }
+
 sub bundle_config {
     my ($self, $section) = @_;
     # my $class = ref($self) || $self;
@@ -83,6 +85,11 @@ sub bundle_config {
 
     # params for pod weaver
     $arg->{weaver} ||= 'pod';
+
+    my $pod_weaver_params = { config_plugin => '@MARCEL' };
+    if (defined $arg->{weaver_finder}) {
+        $pod_weaver_params->{finder} = $arg->{weaver_finder}
+    }
 
     # long list of plugins
     my @wanted = (
@@ -135,7 +142,7 @@ sub bundle_config {
 
         (   $arg->{weaver} eq 'task'
             ? [ 'TaskWeaver' => {} ]
-            : [ 'PodWeaver' => { config_plugin => '@MARCEL' } ]
+            : [ 'PodWeaver'  => $pod_weaver_params ]
         ),
 
         # -- dynamic meta-information
@@ -280,6 +287,9 @@ L<AutoVersion|Dist::Zilla::Plugin::AutoVersion> plugin. Default to 1.
 =item * C<weaver> - can be either C<pod> (default) or C<task>, to load
 respectively either L<PodWeaver|Dist::Zilla::Plugin::PodWeaver> or
 L<TaskWeaver|Dist::Zilla::Plugin::TaskWeaver>.
+
+=item * C<weaver_finder> - a multivalue argument that overrides the default
+file finders used by <PodWeaver|Dist::Zilla::Plugin::PodWeaver>.
 
 =item * C<skip_prereq> - passed as C<skip> option to the
 L<AutoPrereq|Dist::Zilla::Plugin::AutoPrereq> plugin if set. No default.

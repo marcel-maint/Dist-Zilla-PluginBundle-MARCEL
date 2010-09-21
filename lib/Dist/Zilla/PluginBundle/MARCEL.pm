@@ -288,7 +288,7 @@ L<AutoVersion|Dist::Zilla::Plugin::AutoVersion> plugin. Default to 1.
 respectively either L<PodWeaver|Dist::Zilla::Plugin::PodWeaver> or
 L<TaskWeaver|Dist::Zilla::Plugin::TaskWeaver>.
 
-=item * C<weaver_finder> - a multivalue argument that overrides the default
+=item * C<weaver_finder> - a multi-value argument that overrides the default
 file finders used by <PodWeaver|Dist::Zilla::Plugin::PodWeaver>.
 
 =item * C<skip_prereq> - passed as C<skip> option to the
@@ -299,6 +299,10 @@ L<CompileTests|Dist::Zilla::Plugin::CompileTests> to control whether
 to fake home.
 
 =back
+
+=function mvp_multivalue_args
+
+Defines that C<weaver_finder> is a multi-value argument.
 
 =function bundle_config
 

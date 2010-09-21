@@ -10,7 +10,7 @@ use Moose;
 use Moose::Autobox;
 
 # plugins used
-use Dist::Zilla::Plugin::AutoPrereq;
+use Dist::Zilla::Plugin::AutoPrereqs;
 use Dist::Zilla::Plugin::AutoVersion;
 use Dist::Zilla::Plugin::Bugtracker;
 use Dist::Zilla::Plugin::CheckChangeLog;
@@ -54,6 +54,7 @@ use Dist::Zilla::Plugin::TaskWeaver;
 use Dist::Zilla::Plugin::UnusedVarsTests;
 use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
+use Pod::Weaver::PluginBundle::MARCEL;
 with 'Dist::Zilla::Role::PluginBundle';
 
 sub mvp_multivalue_args { qw(weaver_finder) }
@@ -128,7 +129,7 @@ sub bundle_config {
         [ ManifestSkip => {} ],
 
         # -- get prereqs
-        [ AutoPrereq => $prereq_params ],
+        [ AutoPrereqs => $prereq_params ],
 
         # -- gather metadata
         [ Repository => {} ],
@@ -189,15 +190,13 @@ __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
 
-=pod
-
 =begin :prelude
 
 =for test_synopsis
 1;
 __END__
 
-=for stopwords AutoPrereq AutoVersion CompileTests PodWeaver TaskWeaver
+=for stopwords AutoPrereq AutoVersion CompileTests PodWeaver TaskWeaver Quelin
 
 =end :prelude
 
@@ -257,6 +256,7 @@ equivalent to:
     [NextRelease]
     [PkgVersion]
     [PodWeaver]
+    config_plugin = '@MARCEL'
 
     ; -- dynamic meta-information
     [ExecDir]

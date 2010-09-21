@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - added 'weaver_finder' multivalue arg that is passed to [PodWeaver] as
+      'finder'
 
 1.101700  2010-06-19 11:02:49 Europe/Vienna
     - added [NoTabsTests]

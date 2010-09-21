@@ -289,7 +289,7 @@ respectively either L<PodWeaver|Dist::Zilla::Plugin::PodWeaver> or
 L<TaskWeaver|Dist::Zilla::Plugin::TaskWeaver>.
 
 =item * C<weaver_finder> - a multi-value argument that overrides the default
-file finders used by <PodWeaver|Dist::Zilla::Plugin::PodWeaver>.
+file finders used by L<PodWeaver|Dist::Zilla::Plugin::PodWeaver>.
 
 =item * C<skip_prereq> - passed as C<skip> option to the
 L<AutoPrereq|Dist::Zilla::Plugin::AutoPrereq> plugin if set. No default.

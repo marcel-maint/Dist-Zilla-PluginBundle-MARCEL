@@ -18,6 +18,7 @@ use Dist::Zilla::Plugin::CheckChangesTests;
 use Dist::Zilla::Plugin::CompileTests 1.100220;
 use Dist::Zilla::Plugin::CriticTests;
 use Dist::Zilla::Plugin::DistManifestTests;
+use Dist::Zilla::Plugin::EOLTests;
 use Dist::Zilla::Plugin::ExtraTests;
 use Dist::Zilla::Plugin::GatherDir;
 use Dist::Zilla::Plugin::HasVersionTests;
@@ -120,6 +121,7 @@ sub bundle_config {
         [ DistManifestTests   => {} ],
         [ UnusedVarsTests     => {} ],
         [ NoTabsTests         => {} ],
+        [ EOLTests            => {} ],
         [ InlineFilesMARCEL   => {} ],
         [ ReportVersions      => {} ],
 
@@ -233,6 +235,7 @@ equivalent to:
     [DistManifestTests]
     [UnusedVarsTests]
     [NoTabsTests]
+    [EOLTests]
     [InlineFilesMARCEL]
     [ReportVersions]
 
@@ -300,11 +303,11 @@ to fake home.
 
 =back
 
-=function mvp_multivalue_args
+=method mvp_multivalue_args
 
 Defines that C<weaver_finder> is a multi-value argument.
 
-=function bundle_config
+=method bundle_config
 
 Defines the bundle's contents and passes on this bundle's configuration to the
 individual plugins as described above.

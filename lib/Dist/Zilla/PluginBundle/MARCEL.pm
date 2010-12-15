@@ -16,6 +16,7 @@ use Dist::Zilla::Plugin::Bugtracker;
 use Dist::Zilla::Plugin::CheckChangeLog;
 use Dist::Zilla::Plugin::CheckChangesTests;
 use Dist::Zilla::Plugin::CompileTests 1.100220;
+use Dist::Zilla::Plugin::CopyReadmeFromBuild;
 use Dist::Zilla::Plugin::CriticTests;
 use Dist::Zilla::Plugin::DistManifestTests;
 use Dist::Zilla::Plugin::EOLTests;
@@ -57,11 +58,11 @@ use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
 use Pod::Weaver::PluginBundle::MARCEL;
 with 'Dist::Zilla::Role::PluginBundle';
-
 sub mvp_multivalue_args { qw(weaver_finder) }
 
 sub bundle_config {
     my ($self, $section) = @_;
+
     # my $class = ref($self) || $self;
     my $arg = $section->{payload};
 
@@ -87,10 +88,9 @@ sub bundle_config {
 
     # params for pod weaver
     $arg->{weaver} ||= 'pod';
-
     my $pod_weaver_params = { config_plugin => '@MARCEL' };
     if (defined $arg->{weaver_finder}) {
-        $pod_weaver_params->{finder} = $arg->{weaver_finder}
+        $pod_weaver_params->{finder} = $arg->{weaver_finder};
     }
 
     # long list of plugins
@@ -127,7 +127,7 @@ sub bundle_config {
 
         # -- remove some files
         [ PruneCruft   => {} ],
-        [ PruneFiles   => { filenames => [ qw(dist.ini) ] } ],
+        [ PruneFiles   => { filenames => [qw(dist.ini)] } ],
         [ ManifestSkip => {} ],
 
         # -- get prereqs
@@ -139,13 +139,13 @@ sub bundle_config {
         [ Homepage   => {} ],
 
         # -- munge files
-        [ ExtraTests  => {} ],
-        [ NextRelease => {} ],
-        [ PkgVersion  => {} ],
-
+        [ ExtraTests          => {} ],
+        [ NextRelease         => {} ],
+        [ PkgVersion          => {} ],
+        [ CopyReadmeFromBuild => {} ],
         (   $arg->{weaver} eq 'task'
             ? [ 'TaskWeaver' => {} ]
-            : [ 'PodWeaver'  => $pod_weaver_params ]
+            : [ 'PodWeaver' => $pod_weaver_params ]
         ),
 
         # -- dynamic meta-information
@@ -166,7 +166,7 @@ sub bundle_config {
         [ CheckChangeLog => {} ],
 
         #[ @Git],
-        [ UploadToCPAN  => {} ],
+        [ UploadToCPAN => {} ],
     );
 
     # create list of plugins
@@ -185,7 +185,6 @@ sub bundle_config {
         }
     );
     push @plugins, @gitplugins;
-
     return @plugins;
 }
 __PACKAGE__->meta->make_immutable;
@@ -258,6 +257,7 @@ equivalent to:
     [ExtraTests]
     [NextRelease]
     [PkgVersion]
+    [CopyReadmeFromBuild]
     [PodWeaver]
     config_plugin = '@MARCEL'
 

@@ -2,6 +2,7 @@ Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
     - added [EOLTests]
+    - added [CopyReadmeFromBuild]
     - fixed POD link
 
 1.102640  2010-09-21 14:50:26 Europe/Vienna

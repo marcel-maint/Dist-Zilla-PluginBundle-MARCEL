@@ -1,6 +1,7 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - added MYMETA.yml to the generated MANIFEST.SKIP
 
 1.103490  2010-12-15 16:16:55 Europe/Vienna
     - added [EOLTests]

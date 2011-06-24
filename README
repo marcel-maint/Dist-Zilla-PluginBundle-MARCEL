@@ -3,7 +3,7 @@ NAME
     like MARCEL
 
 VERSION
-    version 1.103490
+    version 1.111750
 
 SYNOPSIS
     In your dist.ini:
@@ -125,8 +125,8 @@ AVAILABILITY
     <http://search.cpan.org/dist/Dist-Zilla-PluginBundle-MARCEL/>.
 
     The development version lives at
-    <http://github.com/hanekomu/Dist-Zilla-PluginBundle-MARCEL.git> and may
-    be cloned from
+    <http://github.com/hanekomu/Dist-Zilla-PluginBundle-MARCEL> and may be
+    cloned from
     <git://github.com/hanekomu/Dist-Zilla-PluginBundle-MARCEL.git>. Instead
     of sending patches, please fork this project using the standard git and
     github infrastructure.

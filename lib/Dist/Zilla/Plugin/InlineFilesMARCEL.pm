@@ -65,6 +65,7 @@ ___[ MANIFEST.SKIP ]___
 ,v$
 
 # Makemaker/Build.PL generated files and dirs.
+MYMETA.yml
 MANIFEST.old
 ^Makefile$
 ^Build$

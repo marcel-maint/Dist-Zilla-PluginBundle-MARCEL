@@ -3,7 +3,7 @@ NAME
     like MARCEL
 
 VERSION
-    version 1.111750
+    version 1.113620
 
 SYNOPSIS
     In your dist.ini:
@@ -21,20 +21,20 @@ DESCRIPTION
 
         ; -- fetch & generate files
         [GatherDir]
-        [CompileTests]
-        [CriticTests]
+        [Test::Compile]
+        [Test::Perl::Critic]
         [MetaTests]
         [PodCoverageTests]
         [PodSyntaxTests]
-        [PodSpellingTests]
+        [Test::PodSpelling]
         [KwaliteeTests]
-        [PortabilityTests]
-        [SynopsisTests]
-        [MinimumVersionTests]
+        [Test::Portability]
+        [Test::Synopsis]
+        [Test::MinimumVersion]
         [HasVersionTests]
-        [CheckChangesTests]
-        [DistManifestTests]
-        [UnusedVarsTests]
+        [Test::CheckChanges]
+        [Test::DistManifest]
+        [Test::UnusedVars]
         [NoTabsTests]
         [EOLTests]
         [InlineFilesMARCEL]
@@ -96,7 +96,7 @@ DESCRIPTION
     *   "skip_prereq" - passed as "skip" option to the AutoPrereq plugin if
         set. No default.
 
-    *   "fake_home" - passed to CompileTests to control whether to fake
+    *   "fake_home" - passed to Test::Compile to control whether to fake
         home.
 
 METHODS

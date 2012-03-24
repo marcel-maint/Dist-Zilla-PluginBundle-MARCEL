@@ -14,46 +14,46 @@ use Dist::Zilla::Plugin::AutoPrereqs;
 use Dist::Zilla::Plugin::AutoVersion;
 use Dist::Zilla::Plugin::Bugtracker;
 use Dist::Zilla::Plugin::CheckChangeLog;
-use Dist::Zilla::Plugin::CheckChangesTests;
-use Dist::Zilla::Plugin::CompileTests 1.100220;
 use Dist::Zilla::Plugin::CopyReadmeFromBuild;
-use Dist::Zilla::Plugin::CriticTests;
-use Dist::Zilla::Plugin::DistManifestTests;
 use Dist::Zilla::Plugin::EOLTests;
+use Dist::Zilla::Plugin::ExecDir;
 use Dist::Zilla::Plugin::ExtraTests;
 use Dist::Zilla::Plugin::GatherDir;
 use Dist::Zilla::Plugin::HasVersionTests;
 use Dist::Zilla::Plugin::Homepage;
-use Dist::Zilla::Plugin::ExecDir;
-use Dist::Zilla::Plugin::InstallGuide;
 use Dist::Zilla::Plugin::InlineFilesMARCEL;
+use Dist::Zilla::Plugin::InstallGuide;
 use Dist::Zilla::Plugin::KwaliteeTests;
 use Dist::Zilla::Plugin::License;
+use Dist::Zilla::Plugin::MakeMaker;
 use Dist::Zilla::Plugin::Manifest;
 use Dist::Zilla::Plugin::ManifestSkip;
-use Dist::Zilla::Plugin::MetaProvides::Package;
-use Dist::Zilla::Plugin::MetaYAML;
 use Dist::Zilla::Plugin::MetaJSON;
+use Dist::Zilla::Plugin::MetaProvides::Package;
 use Dist::Zilla::Plugin::MetaTests;
-use Dist::Zilla::Plugin::MakeMaker;
-use Dist::Zilla::Plugin::MinimumVersionTests;
+use Dist::Zilla::Plugin::MetaYAML;
 use Dist::Zilla::Plugin::NextRelease;
 use Dist::Zilla::Plugin::NoTabsTests;
 use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodCoverageTests;
 use Dist::Zilla::Plugin::PodSyntaxTests;
-use Dist::Zilla::Plugin::PodSpellingTests;
 use Dist::Zilla::Plugin::PodWeaver;
-use Dist::Zilla::Plugin::PortabilityTests;
 use Dist::Zilla::Plugin::PruneCruft;
 use Dist::Zilla::Plugin::PruneFiles;
 use Dist::Zilla::Plugin::ReadmeFromPod;
 use Dist::Zilla::Plugin::ReportVersions;
 use Dist::Zilla::Plugin::Repository;
 use Dist::Zilla::Plugin::ShareDir;
-use Dist::Zilla::Plugin::SynopsisTests;
 use Dist::Zilla::Plugin::TaskWeaver;
-use Dist::Zilla::Plugin::UnusedVarsTests;
+use Dist::Zilla::Plugin::Test::CheckChanges;
+use Dist::Zilla::Plugin::Test::Compile 1.100220;
+use Dist::Zilla::Plugin::Test::DistManifest;
+use Dist::Zilla::Plugin::Test::MinimumVersion;
+use Dist::Zilla::Plugin::Test::Perl::Critic;
+use Dist::Zilla::Plugin::Test::PodSpelling;
+use Dist::Zilla::Plugin::Test::Portability;
+use Dist::Zilla::Plugin::Test::Synopsis;
+use Dist::Zilla::Plugin::Test::UnusedVars;
 use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
 use Pod::Weaver::PluginBundle::MARCEL;
@@ -105,25 +105,25 @@ sub bundle_config {
         ],
 
         # -- fetch & generate files
-        [ GatherDir           => {} ],
-        [ CompileTests        => $compile_params ],
-        [ CriticTests         => {} ],
-        [ MetaTests           => {} ],
-        [ PodCoverageTests    => {} ],
-        [ PodSyntaxTests      => {} ],
-        [ PodSpellingTests    => {} ],
-        [ KwaliteeTests       => {} ],
-        [ PortabilityTests    => {} ],
-        [ SynopsisTests       => {} ],
-        [ MinimumVersionTests => {} ],
-        [ HasVersionTests     => {} ],
-        [ CheckChangesTests   => {} ],
-        [ DistManifestTests   => {} ],
-        [ UnusedVarsTests     => {} ],
-        [ NoTabsTests         => {} ],
-        [ EOLTests            => {} ],
-        [ InlineFilesMARCEL   => {} ],
-        [ ReportVersions      => {} ],
+        [ GatherDir              => {} ],
+        [ 'Test::Compile'        => $compile_params ],
+        [ 'Test::Perl::Critic'   => {} ],
+        [ MetaTests              => {} ],
+        [ PodCoverageTests       => {} ],
+        [ PodSyntaxTests         => {} ],
+        [ 'Test::PodSpelling'    => {} ],
+        [ KwaliteeTests          => {} ],
+        [ 'Test::Portability'    => {} ],
+        [ 'Test::Synopsis'       => {} ],
+        [ 'Test::MinimumVersion' => {} ],
+        [ HasVersionTests        => {} ],
+        [ 'Test::CheckChanges'   => {} ],
+        [ 'Test::DistManifest'   => {} ],
+        [ 'Test::UnusedVars'     => {} ],
+        [ NoTabsTests            => {} ],
+        [ EOLTests               => {} ],
+        [ InlineFilesMARCEL      => {} ],
+        [ ReportVersions         => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -197,7 +197,7 @@ no Moose;
 1;
 __END__
 
-=for stopwords AutoPrereq AutoVersion CompileTests PodWeaver TaskWeaver Quelin
+=for stopwords AutoPrereq AutoVersion Test::Compile PodWeaver TaskWeaver Quelin
 
 =end :prelude
 
@@ -219,20 +219,20 @@ equivalent to:
 
     ; -- fetch & generate files
     [GatherDir]
-    [CompileTests]
-    [CriticTests]
+    [Test::Compile]
+    [Test::Perl::Critic]
     [MetaTests]
     [PodCoverageTests]
     [PodSyntaxTests]
-    [PodSpellingTests]
+    [Test::PodSpelling]
     [KwaliteeTests]
-    [PortabilityTests]
-    [SynopsisTests]
-    [MinimumVersionTests]
+    [Test::Portability]
+    [Test::Synopsis]
+    [Test::MinimumVersion]
     [HasVersionTests]
-    [CheckChangesTests]
-    [DistManifestTests]
-    [UnusedVarsTests]
+    [Test::CheckChanges]
+    [Test::DistManifest]
+    [Test::UnusedVars]
     [NoTabsTests]
     [EOLTests]
     [InlineFilesMARCEL]
@@ -298,7 +298,7 @@ file finders used by L<PodWeaver|Dist::Zilla::Plugin::PodWeaver>.
 L<AutoPrereq|Dist::Zilla::Plugin::AutoPrereq> plugin if set. No default.
 
 =item * C<fake_home> - passed to
-L<CompileTests|Dist::Zilla::Plugin::CompileTests> to control whether
+L<Test::Compile|Dist::Zilla::Plugin::Test::Compile> to control whether
 to fake home.
 
 =back

@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.120860  2012-03-26 01:20:17 Europe/Paris
     - this module has been abandoned by his original author (MARCEL). This is
       just a maintenance release to make the module work correctly from the
       CPAN to be able to maintain others modules made by MARCEL.

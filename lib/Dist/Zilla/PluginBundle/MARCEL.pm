@@ -112,7 +112,7 @@ sub bundle_config {
         [ PodCoverageTests       => {} ],
         [ PodSyntaxTests         => {} ],
         [ 'Test::PodSpelling'    => {} ],
-        [ "Test::Kwalitee'       => {} ],
+        [ 'Test::Kwalitee'       => {} ],
         [ 'Test::Portability'    => {} ],
         [ 'Test::Synopsis'       => {} ],
         [ 'Test::MinimumVersion' => {} ],

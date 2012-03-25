@@ -1,6 +1,11 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - this module has been abandoned by his original author (MARCEL). This is
+      just a maintenance release to make the module work correctly from the
+      CPAN to be able to maintain others modules made by MARCEL.
+    - fixed plugin names for many *Tests to Test::* as they have moved on CPAN
+      (Olivier Mengué)
 
 1.111750  2011-06-24 19:42:09 Europe/Vienna
     - added MYMETA.yml to the generated MANIFEST.SKIP

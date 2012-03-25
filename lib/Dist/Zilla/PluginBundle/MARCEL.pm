@@ -15,7 +15,6 @@ use Dist::Zilla::Plugin::AutoVersion;
 use Dist::Zilla::Plugin::Bugtracker;
 use Dist::Zilla::Plugin::CheckChangeLog;
 use Dist::Zilla::Plugin::CopyReadmeFromBuild;
-use Dist::Zilla::Plugin::EOLTests;
 use Dist::Zilla::Plugin::ExecDir;
 use Dist::Zilla::Plugin::ExtraTests;
 use Dist::Zilla::Plugin::GatherDir;
@@ -23,7 +22,6 @@ use Dist::Zilla::Plugin::HasVersionTests;
 use Dist::Zilla::Plugin::Homepage;
 use Dist::Zilla::Plugin::InlineFilesMARCEL;
 use Dist::Zilla::Plugin::InstallGuide;
-use Dist::Zilla::Plugin::KwaliteeTests;
 use Dist::Zilla::Plugin::License;
 use Dist::Zilla::Plugin::MakeMaker;
 use Dist::Zilla::Plugin::Manifest;
@@ -48,6 +46,8 @@ use Dist::Zilla::Plugin::TaskWeaver;
 use Dist::Zilla::Plugin::Test::CheckChanges;
 use Dist::Zilla::Plugin::Test::Compile 1.100220;
 use Dist::Zilla::Plugin::Test::DistManifest;
+use Dist::Zilla::Plugin::Test::EOL;
+use Dist::Zilla::Plugin::Test::Kwalitee;
 use Dist::Zilla::Plugin::Test::MinimumVersion;
 use Dist::Zilla::Plugin::Test::Perl::Critic;
 use Dist::Zilla::Plugin::Test::PodSpelling;
@@ -112,7 +112,7 @@ sub bundle_config {
         [ PodCoverageTests       => {} ],
         [ PodSyntaxTests         => {} ],
         [ 'Test::PodSpelling'    => {} ],
-        [ KwaliteeTests          => {} ],
+        [ "Test::Kwalitee'       => {} ],
         [ 'Test::Portability'    => {} ],
         [ 'Test::Synopsis'       => {} ],
         [ 'Test::MinimumVersion' => {} ],
@@ -121,7 +121,7 @@ sub bundle_config {
         [ 'Test::DistManifest'   => {} ],
         [ 'Test::UnusedVars'     => {} ],
         [ NoTabsTests            => {} ],
-        [ EOLTests               => {} ],
+        [ 'Test::EOL'            => {} ],
         [ InlineFilesMARCEL      => {} ],
         [ ReportVersions         => {} ],
 
@@ -225,7 +225,7 @@ equivalent to:
     [PodCoverageTests]
     [PodSyntaxTests]
     [Test::PodSpelling]
-    [KwaliteeTests]
+    [Test::Kwalitee]
     [Test::Portability]
     [Test::Synopsis]
     [Test::MinimumVersion]
@@ -234,7 +234,7 @@ equivalent to:
     [Test::DistManifest]
     [Test::UnusedVars]
     [NoTabsTests]
-    [EOLTests]
+    [Test::EOL]
     [InlineFilesMARCEL]
     [ReportVersions]
 

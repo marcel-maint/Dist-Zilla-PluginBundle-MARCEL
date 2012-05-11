@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - minor internal build change: fixed stopwords locally in POD for a clean
+      build.
 
 1.120860  2012-03-26 01:20:17 Europe/Paris
     - this module has been abandoned by his original author (MARCEL). This is

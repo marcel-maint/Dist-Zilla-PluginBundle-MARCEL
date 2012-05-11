@@ -18,7 +18,7 @@ no Moose;
 1;
 __END__
 
-=for stopwords Quelin
+=for stopwords Quelin Mengu Mengué
 
 =end :prelude
 

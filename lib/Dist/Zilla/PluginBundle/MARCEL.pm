@@ -197,7 +197,7 @@ no Moose;
 1;
 __END__
 
-=for stopwords AutoPrereq AutoVersion Test::Compile PodWeaver TaskWeaver Quelin
+=for stopwords AutoPrereq AutoVersion Test::Compile PodWeaver TaskWeaver Quelin Mengu Mengué
 
 =end :prelude
 

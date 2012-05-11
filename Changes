@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.121330  2012-05-12 00:06:22 Europe/Paris
     - minor internal build change: fixed stopwords locally in POD for a clean
       build.
 

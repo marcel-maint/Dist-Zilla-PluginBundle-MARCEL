@@ -312,3 +312,7 @@ Defines that C<weaver_finder> is a multi-value argument.
 Defines the bundle's contents and passes on this bundle's configuration to the
 individual plugins as described above.
 
+=head1 SEE ALSO
+
+L<Pod::Weaver::PluginBundle::MARCEL>
+

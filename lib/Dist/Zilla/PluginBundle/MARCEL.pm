@@ -111,7 +111,7 @@ sub bundle_config {
         [ MetaTests              => {} ],
         [ PodCoverageTests       => {} ],
         [ PodSyntaxTests         => {} ],
-        [ 'Test::PodSpelling'    => {} ],
+        [ 'Test::PodSpelling'    => { stopwords => [ qw<CPAN multi> ] } ],
         [ 'Test::Kwalitee'       => {} ],
         [ 'Test::Portability'    => {} ],
         [ 'Test::Synopsis'       => {} ],
@@ -225,6 +225,8 @@ equivalent to:
     [PodCoverageTests]
     [PodSyntaxTests]
     [Test::PodSpelling]
+    stopwords = CPAN
+    stopwords = multi
     [Test::Kwalitee]
     [Test::Portability]
     [Test::Synopsis]

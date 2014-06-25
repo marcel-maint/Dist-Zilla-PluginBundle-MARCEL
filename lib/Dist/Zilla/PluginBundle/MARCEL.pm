@@ -197,7 +197,7 @@ no Moose;
 1;
 __END__
 
-=for stopwords AutoPrereq AutoVersion Test::Compile PodWeaver TaskWeaver Quelin Mengu Mengué
+=for stopwords AutoPrereqs AutoVersion Test::Compile PodWeaver TaskWeaver Quelin Mengu Mengué
 
 =end :prelude
 
@@ -248,7 +248,7 @@ equivalent to:
     [ManifestSkip]
 
     ; -- get prereqs
-    [AutoPrereq]
+    [AutoPrereqs]
 
     ; -- gather metadata
     [Repository]
@@ -297,7 +297,7 @@ L<TaskWeaver|Dist::Zilla::Plugin::TaskWeaver>.
 file finders used by L<PodWeaver|Dist::Zilla::Plugin::PodWeaver>.
 
 =item * C<skip_prereq> - passed as C<skip> option to the
-L<AutoPrereq|Dist::Zilla::Plugin::AutoPrereq> plugin if set. No default.
+L<AutoPrereqs|Dist::Zilla::Plugin::AutoPrereqs> plugin if set. No default.
 
 =item * C<fake_home> - passed to
 L<Test::Compile|Dist::Zilla::Plugin::Test::Compile> to control whether

@@ -74,7 +74,7 @@ sub bundle_config {
         [ 'Test::CheckChanges'   => {} ],
         [ 'Test::DistManifest'   => {} ],
         [ 'Test::UnusedVars'     => {} ],
-        [ NoTabsTests            => {} ],
+        [ 'Test::NoTabs'         => {} ],
         [ 'Test::EOL'            => {} ],
         [ InlineFilesMARCEL      => {} ],
         [ ReportVersions         => {} ],

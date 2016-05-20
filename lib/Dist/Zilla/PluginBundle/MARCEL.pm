@@ -78,7 +78,7 @@ sub bundle_config {
         [ 'Test::NoTabs'         => {} ],
         [ 'Test::EOL'            => {} ],
         [ InlineFilesMARCEL      => {} ],
-        [ ReportVersions         => {} ],
+        [ 'Test::ReportPrereqs'  => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -190,10 +190,10 @@ equivalent to:
     [Test::CheckChanges]
     [Test::DistManifest]
     [Test::UnusedVars]
-    [NoTabsTests]
+    [Test::NoTabs]
     [Test::EOL]
     [InlineFilesMARCEL]
-    [ReportVersions]
+    [Test::ReportPrereqs]
 
     ; -- remove some files
     [PruneCruft]

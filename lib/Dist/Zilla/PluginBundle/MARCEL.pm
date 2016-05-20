@@ -9,54 +9,8 @@ use Class::Load ();  # load_class
 use Moose;
 use Moose::Autobox;
 
-# plugins used
-use Dist::Zilla::Plugin::AutoPrereqs;
-use Dist::Zilla::Plugin::AutoVersion;
-use Dist::Zilla::Plugin::Bugtracker;
-use Dist::Zilla::Plugin::CheckChangeLog;
-use Dist::Zilla::Plugin::CopyReadmeFromBuild;
-use Dist::Zilla::Plugin::ExecDir;
-use Dist::Zilla::Plugin::ExtraTests;
-use Dist::Zilla::Plugin::GatherDir;
-use Dist::Zilla::Plugin::HasVersionTests;
-use Dist::Zilla::Plugin::Homepage;
-use Dist::Zilla::Plugin::InlineFilesMARCEL;
-use Dist::Zilla::Plugin::InstallGuide;
-use Dist::Zilla::Plugin::License;
-use Dist::Zilla::Plugin::MakeMaker;
-use Dist::Zilla::Plugin::Manifest;
-use Dist::Zilla::Plugin::ManifestSkip;
-use Dist::Zilla::Plugin::MetaJSON;
-use Dist::Zilla::Plugin::MetaProvides::Package;
-use Dist::Zilla::Plugin::MetaTests;
-use Dist::Zilla::Plugin::MetaYAML;
-use Dist::Zilla::Plugin::NextRelease;
-use Dist::Zilla::Plugin::NoTabsTests;
-use Dist::Zilla::Plugin::PkgVersion;
-use Dist::Zilla::Plugin::PodCoverageTests;
-use Dist::Zilla::Plugin::PodSyntaxTests;
-use Dist::Zilla::Plugin::PodWeaver;
-use Dist::Zilla::Plugin::PruneCruft;
-use Dist::Zilla::Plugin::PruneFiles;
-use Dist::Zilla::Plugin::ReadmeFromPod;
-use Dist::Zilla::Plugin::ReportVersions;
-use Dist::Zilla::Plugin::Repository;
-use Dist::Zilla::Plugin::ShareDir;
-use Dist::Zilla::Plugin::TaskWeaver;
-use Dist::Zilla::Plugin::Test::CheckChanges;
-use Dist::Zilla::Plugin::Test::Compile 1.100220;
-use Dist::Zilla::Plugin::Test::DistManifest;
-use Dist::Zilla::Plugin::Test::EOL;
-use Dist::Zilla::Plugin::Test::Kwalitee;
-use Dist::Zilla::Plugin::Test::MinimumVersion;
-use Dist::Zilla::Plugin::Test::Perl::Critic;
-use Dist::Zilla::Plugin::Test::PodSpelling;
-use Dist::Zilla::Plugin::Test::Portability;
-use Dist::Zilla::Plugin::Test::Synopsis;
-use Dist::Zilla::Plugin::Test::UnusedVars;
-use Dist::Zilla::Plugin::UploadToCPAN;
-use Dist::Zilla::PluginBundle::Git;
-use Pod::Weaver::PluginBundle::MARCEL;
+use Dist::Zilla::PluginBundle::Git ();
+
 with 'Dist::Zilla::Role::PluginBundle';
 sub mvp_multivalue_args { qw(weaver_finder) }
 
@@ -81,10 +35,10 @@ sub bundle_config {
       : {};
 
     # params for compiletests
-    my $compile_params =
-      defined $arg->{fake_home}
-      ? { fake_home => $arg->{fake_home} }
-      : {};
+    my $compile_params = {
+      ':version' => '1.100220',
+      defined $arg->{fake_home} ? (fake_home => $arg->{fake_home}) : (),
+    };
 
     # params for pod weaver
     $arg->{weaver} ||= 'pod';

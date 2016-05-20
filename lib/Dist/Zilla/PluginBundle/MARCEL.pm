@@ -11,7 +11,8 @@ use Moose::Autobox;
 
 use Dist::Zilla::PluginBundle::Git ();
 
-with 'Dist::Zilla::Role::PluginBundle';
+with 'Dist::Zilla::Role::PluginBundle',
+     'Dist::Zilla::Role::BundleDeps';
 sub mvp_multivalue_args { qw(weaver_finder) }
 
 sub bundle_config {

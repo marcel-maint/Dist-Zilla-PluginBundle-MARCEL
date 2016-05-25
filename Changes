@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.161470  2016-05-26 01:28:06+02:00 Europe/Paris
     - POD: add link to Pod::Weaver::PluginBundle::MARCEL
     - Test::PodSpelling: add stopwords 'CPAN', 'multi'
     - Replace [NoTabsTests] with [Test::NoTabs]

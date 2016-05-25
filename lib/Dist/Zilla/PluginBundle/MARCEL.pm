@@ -60,7 +60,8 @@ sub bundle_config {
         ],
 
         # -- fetch & generate files
-        [ GatherDir              => {} ],
+        # README will be generated from POD
+        [ GatherDir              => { 'exclude_match' => [ '^README$' ] } ],
         [ 'Test::Compile'        => $compile_params ],
         [ 'Test::Perl::Critic'   => {} ],
         [ MetaTests              => {} ],
@@ -113,7 +114,7 @@ sub bundle_config {
         [ MakeMaker     => {} ],
         [ MetaYAML      => {} ],
         [ MetaJSON      => {} ],
-        [ ReadmeFromPod => {} ],
+        [ Pod2Readme    => {} ],
         [ InstallGuide  => {} ],
         [ Manifest      => {} ],    # should come last
 
@@ -174,6 +175,7 @@ equivalent to:
 
     ; -- fetch & generate files
     [GatherDir]
+    exclude_match = ^README$
     [Test::Compile]
     [Test::Perl::Critic]
     [MetaTests]
@@ -228,7 +230,7 @@ equivalent to:
     [MakeMaker]
     [MetaYAML]
     [MetaJSON]
-    [ReadmeFromPod]
+    [Pod2Readme]
     [InstallGuide]
     [Manifest] ; should come last
 

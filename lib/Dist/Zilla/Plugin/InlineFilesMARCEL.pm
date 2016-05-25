@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::InlineFilesMARCEL;
+
 # ABSTRACT: Write static files that I always use
 use Moose;
 use Test::Synopsis;

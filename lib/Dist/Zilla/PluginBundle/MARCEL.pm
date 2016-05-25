@@ -99,7 +99,6 @@ sub bundle_config {
         [ ExtraTests          => {} ],
         [ NextRelease         => {} ],
         [ PkgVersion          => {} ],
-        [ CopyReadmeFromBuild => {} ],
         (   $arg->{weaver} eq 'task'
             ? [ 'TaskWeaver' => {} ]
             : [ 'PodWeaver' => $pod_weaver_params ]
@@ -118,6 +117,9 @@ sub bundle_config {
         [ Pod2Readme    => {} ],
         [ InstallGuide  => {} ],
         [ Manifest      => {} ],    # should come last
+
+        # -- keep a copy of generated files in the repo
+        [ CopyFilesFromBuild   => { copy     => [ 'README' ] } ],
 
         # -- release
         [ CheckChangeLog => {} ],
@@ -220,7 +222,6 @@ equivalent to:
     [ExtraTests]
     [NextRelease]
     [PkgVersion]
-    [CopyReadmeFromBuild]
     [PodWeaver]
     config_plugin = '@MARCEL'
 
@@ -237,6 +238,10 @@ equivalent to:
     [Pod2Readme]
     [InstallGuide]
     [Manifest] ; should come last
+
+    ; -- keep a copy in the repo
+    [CopyFilesFromBuild]
+    copy = README
 
     ; -- release
     [CheckChangeLog]

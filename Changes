@@ -7,6 +7,8 @@ Revision history for Perl extension {{$dist->name}}
     - Replace [ReportVersions] with [Test::ReportPrereqs]
     - Replace [ReadmeFromPod] with [Pod2Readme]
     - Add roles PluginBundle::PluginRemover and PluginBundle::Config::Slicer
+    - Replace [CopyReadmeFromBuild] with [CopyFilesFromBuild]
+      because CopyReadmeFromBuild copies only after release (RT#111522)
 
 1.121330  2012-05-12 00:06:22 Europe/Paris
     - minor internal build change: fixed stopwords locally in POD for a clean

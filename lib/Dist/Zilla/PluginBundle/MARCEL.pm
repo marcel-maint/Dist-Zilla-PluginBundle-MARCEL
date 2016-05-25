@@ -282,5 +282,18 @@ individual plugins as described above.
 
 =head1 SEE ALSO
 
+=over 4
+
+=item *
+
 L<Pod::Weaver::PluginBundle::MARCEL>
 
+=item *
+
+L<Dist::Zilla::Role::PluginBundle::PluginRemover>
+
+=item *
+
+L<Dist::Zilla::Role::PluginBundle::Config::Slicer>
+
+=back

@@ -3,7 +3,7 @@ NAME
     like MARCEL
 
 VERSION
-    version 1.121330
+    version 1.161470
 
 SYNOPSIS
     In your dist.ini:
@@ -13,6 +13,8 @@ SYNOPSIS
         weaver        = pod        ; default, can also be 'task'
         skip_prereq   = ::Test$    ; no default
 
+    This bundle implements the PluginRemover and Config::Slicer roles.
+
 DESCRIPTION
     This is a plugin bundle to load all plugins that I am using. It is
     equivalent to:
@@ -21,12 +23,15 @@ DESCRIPTION
 
         ; -- fetch & generate files
         [GatherDir]
+        exclude_match = ^README$
         [Test::Compile]
         [Test::Perl::Critic]
         [MetaTests]
         [PodCoverageTests]
         [PodSyntaxTests]
         [Test::PodSpelling]
+        stopwords = CPAN
+        stopwords = multi
         [Test::Kwalitee]
         [Test::Portability]
         [Test::Synopsis]
@@ -35,10 +40,10 @@ DESCRIPTION
         [Test::CheckChanges]
         [Test::DistManifest]
         [Test::UnusedVars]
-        [NoTabsTests]
+        [Test::NoTabs]
         [Test::EOL]
         [InlineFilesMARCEL]
-        [ReportVersions]
+        [Test::ReportPrereqs]
 
         ; -- remove some files
         [PruneCruft]
@@ -48,7 +53,7 @@ DESCRIPTION
         [ManifestSkip]
 
         ; -- get prereqs
-        [AutoPrereq]
+        [AutoPrereqs]
 
         ; -- gather metadata
         [Repository]
@@ -59,7 +64,6 @@ DESCRIPTION
         [ExtraTests]
         [NextRelease]
         [PkgVersion]
-        [CopyReadmeFromBuild]
         [PodWeaver]
         config_plugin = '@MARCEL'
 
@@ -73,9 +77,13 @@ DESCRIPTION
         [MakeMaker]
         [MetaYAML]
         [MetaJSON]
-        [ReadmeFromPod]
+        [Pod2Readme]
         [InstallGuide]
         [Manifest] ; should come last
+
+        ; -- keep a copy in the repo
+        [CopyFilesFromBuild]
+        copy = README
 
         ; -- release
         [CheckChangeLog]
@@ -93,7 +101,7 @@ DESCRIPTION
     *   "weaver_finder" - a multi-value argument that overrides the default
         file finders used by PodWeaver.
 
-    *   "skip_prereq" - passed as "skip" option to the AutoPrereq plugin if
+    *   "skip_prereq" - passed as "skip" option to the AutoPrereqs plugin if
         set. No default.
 
     *   "fake_home" - passed to Test::Compile to control whether to fake
@@ -106,6 +114,13 @@ METHODS
   bundle_config
     Defines the bundle's contents and passes on this bundle's configuration
     to the individual plugins as described above.
+
+SEE ALSO
+    *   Pod::Weaver::PluginBundle::MARCEL
+
+    *   Dist::Zilla::Role::PluginBundle::PluginRemover
+
+    *   Dist::Zilla::Role::PluginBundle::Config::Slicer
 
 INSTALLATION
     See perlmodinstall for information and options on installing Perl

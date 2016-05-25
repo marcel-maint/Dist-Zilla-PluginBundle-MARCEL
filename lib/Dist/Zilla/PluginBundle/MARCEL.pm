@@ -5,59 +5,15 @@ use warnings;
 package Dist::Zilla::PluginBundle::MARCEL;
 
 # ABSTRACT: Build and release a distribution like MARCEL
-use Class::Load ();  # load_class
 use Moose;
 use Moose::Autobox;
 
-# plugins used
-use Dist::Zilla::Plugin::AutoPrereqs;
-use Dist::Zilla::Plugin::AutoVersion;
-use Dist::Zilla::Plugin::Bugtracker;
-use Dist::Zilla::Plugin::CheckChangeLog;
-use Dist::Zilla::Plugin::CopyReadmeFromBuild;
-use Dist::Zilla::Plugin::ExecDir;
-use Dist::Zilla::Plugin::ExtraTests;
-use Dist::Zilla::Plugin::GatherDir;
-use Dist::Zilla::Plugin::HasVersionTests;
-use Dist::Zilla::Plugin::Homepage;
-use Dist::Zilla::Plugin::InlineFilesMARCEL;
-use Dist::Zilla::Plugin::InstallGuide;
-use Dist::Zilla::Plugin::License;
-use Dist::Zilla::Plugin::MakeMaker;
-use Dist::Zilla::Plugin::Manifest;
-use Dist::Zilla::Plugin::ManifestSkip;
-use Dist::Zilla::Plugin::MetaJSON;
-use Dist::Zilla::Plugin::MetaProvides::Package;
-use Dist::Zilla::Plugin::MetaTests;
-use Dist::Zilla::Plugin::MetaYAML;
-use Dist::Zilla::Plugin::NextRelease;
-use Dist::Zilla::Plugin::NoTabsTests;
-use Dist::Zilla::Plugin::PkgVersion;
-use Dist::Zilla::Plugin::PodCoverageTests;
-use Dist::Zilla::Plugin::PodSyntaxTests;
-use Dist::Zilla::Plugin::PodWeaver;
-use Dist::Zilla::Plugin::PruneCruft;
-use Dist::Zilla::Plugin::PruneFiles;
-use Dist::Zilla::Plugin::ReadmeFromPod;
-use Dist::Zilla::Plugin::ReportVersions;
-use Dist::Zilla::Plugin::Repository;
-use Dist::Zilla::Plugin::ShareDir;
-use Dist::Zilla::Plugin::TaskWeaver;
-use Dist::Zilla::Plugin::Test::CheckChanges;
-use Dist::Zilla::Plugin::Test::Compile 1.100220;
-use Dist::Zilla::Plugin::Test::DistManifest;
-use Dist::Zilla::Plugin::Test::EOL;
-use Dist::Zilla::Plugin::Test::Kwalitee;
-use Dist::Zilla::Plugin::Test::MinimumVersion;
-use Dist::Zilla::Plugin::Test::Perl::Critic;
-use Dist::Zilla::Plugin::Test::PodSpelling;
-use Dist::Zilla::Plugin::Test::Portability;
-use Dist::Zilla::Plugin::Test::Synopsis;
-use Dist::Zilla::Plugin::Test::UnusedVars;
-use Dist::Zilla::Plugin::UploadToCPAN;
-use Dist::Zilla::PluginBundle::Git;
-use Pod::Weaver::PluginBundle::MARCEL;
-with 'Dist::Zilla::Role::PluginBundle';
+use Dist::Zilla::PluginBundle::Git ();
+
+with 'Dist::Zilla::Role::PluginBundle',
+     'Dist::Zilla::Role::PluginBundle::PluginRemover',
+     'Dist::Zilla::Role::PluginBundle::Config::Slicer',
+     'Dist::Zilla::Role::BundleDeps';
 sub mvp_multivalue_args { qw(weaver_finder) }
 
 sub bundle_config {
@@ -81,10 +37,10 @@ sub bundle_config {
       : {};
 
     # params for compiletests
-    my $compile_params =
-      defined $arg->{fake_home}
-      ? { fake_home => $arg->{fake_home} }
-      : {};
+    my $compile_params = {
+      ':version' => '1.100220',
+      defined $arg->{fake_home} ? (fake_home => $arg->{fake_home}) : (),
+    };
 
     # params for pod weaver
     $arg->{weaver} ||= 'pod';
@@ -105,7 +61,8 @@ sub bundle_config {
         ],
 
         # -- fetch & generate files
-        [ GatherDir              => {} ],
+        # README will be generated from POD
+        [ GatherDir              => { 'exclude_match' => [ '^README$' ] } ],
         [ 'Test::Compile'        => $compile_params ],
         [ 'Test::Perl::Critic'   => {} ],
         [ MetaTests              => {} ],
@@ -120,10 +77,10 @@ sub bundle_config {
         [ 'Test::CheckChanges'   => {} ],
         [ 'Test::DistManifest'   => {} ],
         [ 'Test::UnusedVars'     => {} ],
-        [ NoTabsTests            => {} ],
+        [ 'Test::NoTabs'         => {} ],
         [ 'Test::EOL'            => {} ],
         [ InlineFilesMARCEL      => {} ],
-        [ ReportVersions         => {} ],
+        [ 'Test::ReportPrereqs'  => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -142,7 +99,6 @@ sub bundle_config {
         [ ExtraTests          => {} ],
         [ NextRelease         => {} ],
         [ PkgVersion          => {} ],
-        [ CopyReadmeFromBuild => {} ],
         (   $arg->{weaver} eq 'task'
             ? [ 'TaskWeaver' => {} ]
             : [ 'PodWeaver' => $pod_weaver_params ]
@@ -158,9 +114,12 @@ sub bundle_config {
         [ MakeMaker     => {} ],
         [ MetaYAML      => {} ],
         [ MetaJSON      => {} ],
-        [ ReadmeFromPod => {} ],
+        [ Pod2Readme    => {} ],
         [ InstallGuide  => {} ],
         [ Manifest      => {} ],    # should come last
+
+        # -- keep a copy of generated files in the repo
+        [ CopyFilesFromBuild   => { copy     => [ 'README' ] } ],
 
         # -- release
         [ CheckChangeLog => {} ],
@@ -174,7 +133,6 @@ sub bundle_config {
     for my $wanted (@wanted) {
         my ($name, $arg) = @$wanted;
         my $class = "Dist::Zilla::Plugin::$name";
-        Class::Load::load_class($class);    # make sure plugin exists
         push @plugins, [ "$section->{name}/$name" => $class => $arg ];
     }
 
@@ -197,7 +155,8 @@ no Moose;
 1;
 __END__
 
-=for stopwords AutoPrereqs AutoVersion Test::Compile PodWeaver TaskWeaver Quelin Mengu Mengué
+=for stopwords AutoPrereqs AutoVersion Test::Compile PodWeaver TaskWeaver PluginRemover
+Quelin Mengu Mengué
 
 =end :prelude
 
@@ -210,6 +169,9 @@ In your F<dist.ini>:
     weaver        = pod        ; default, can also be 'task'
     skip_prereq   = ::Test$    ; no default
 
+This bundle implements the L<PluginRemover|Dist::Zilla::PluginBundle::PluginRemover>
+and L<Config::Slicer|Dist::Zilla::PluginBundle::Config::Slicer> roles.
+
 =head1 DESCRIPTION
 
 This is a plugin bundle to load all plugins that I am using. It is
@@ -219,6 +181,7 @@ equivalent to:
 
     ; -- fetch & generate files
     [GatherDir]
+    exclude_match = ^README$
     [Test::Compile]
     [Test::Perl::Critic]
     [MetaTests]
@@ -235,10 +198,10 @@ equivalent to:
     [Test::CheckChanges]
     [Test::DistManifest]
     [Test::UnusedVars]
-    [NoTabsTests]
+    [Test::NoTabs]
     [Test::EOL]
     [InlineFilesMARCEL]
-    [ReportVersions]
+    [Test::ReportPrereqs]
 
     ; -- remove some files
     [PruneCruft]
@@ -259,7 +222,6 @@ equivalent to:
     [ExtraTests]
     [NextRelease]
     [PkgVersion]
-    [CopyReadmeFromBuild]
     [PodWeaver]
     config_plugin = '@MARCEL'
 
@@ -273,9 +235,13 @@ equivalent to:
     [MakeMaker]
     [MetaYAML]
     [MetaJSON]
-    [ReadmeFromPod]
+    [Pod2Readme]
     [InstallGuide]
     [Manifest] ; should come last
+
+    ; -- keep a copy in the repo
+    [CopyFilesFromBuild]
+    copy = README
 
     ; -- release
     [CheckChangeLog]
@@ -316,5 +282,18 @@ individual plugins as described above.
 
 =head1 SEE ALSO
 
+=over 4
+
+=item *
+
 L<Pod::Weaver::PluginBundle::MARCEL>
 
+=item *
+
+L<Dist::Zilla::Role::PluginBundle::PluginRemover>
+
+=item *
+
+L<Dist::Zilla::Role::PluginBundle::Config::Slicer>
+
+=back

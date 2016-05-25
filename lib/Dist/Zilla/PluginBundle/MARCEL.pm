@@ -12,6 +12,8 @@ use Moose::Autobox;
 use Dist::Zilla::PluginBundle::Git ();
 
 with 'Dist::Zilla::Role::PluginBundle',
+     'Dist::Zilla::Role::PluginBundle::PluginRemover',
+     'Dist::Zilla::Role::PluginBundle::Config::Slicer',
      'Dist::Zilla::Role::BundleDeps';
 sub mvp_multivalue_args { qw(weaver_finder) }
 
@@ -153,7 +155,8 @@ no Moose;
 1;
 __END__
 
-=for stopwords AutoPrereqs AutoVersion Test::Compile PodWeaver TaskWeaver Quelin Mengu Mengué
+=for stopwords AutoPrereqs AutoVersion Test::Compile PodWeaver TaskWeaver PluginRemover
+Quelin Mengu Mengué
 
 =end :prelude
 
@@ -165,6 +168,9 @@ In your F<dist.ini>:
     major_version = 1          ; this is the default
     weaver        = pod        ; default, can also be 'task'
     skip_prereq   = ::Test$    ; no default
+
+This bundle implements the L<PluginRemover|Dist::Zilla::PluginBundle::PluginRemover>
+and L<Config::Slicer|Dist::Zilla::PluginBundle::Config::Slicer> roles.
 
 =head1 DESCRIPTION
 

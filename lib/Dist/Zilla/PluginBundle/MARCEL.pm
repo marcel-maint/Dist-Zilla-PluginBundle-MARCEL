@@ -5,7 +5,6 @@ use warnings;
 package Dist::Zilla::PluginBundle::MARCEL;
 
 # ABSTRACT: Build and release a distribution like MARCEL
-use Class::Load ();  # load_class
 use Moose;
 use Moose::Autobox;
 
@@ -132,7 +131,6 @@ sub bundle_config {
     for my $wanted (@wanted) {
         my ($name, $arg) = @$wanted;
         my $class = "Dist::Zilla::Plugin::$name";
-        Class::Load::load_class($class);    # make sure plugin exists
         push @plugins, [ "$section->{name}/$name" => $class => $arg ];
     }
 

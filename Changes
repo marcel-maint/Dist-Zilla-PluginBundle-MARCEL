@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.161760  2016-06-24 08:39:54+02:00 Europe/Paris
     - Fix self dependency on DZP::InlineFilesMARCEL (RT#114748)
 
 1.161470  2016-05-26 01:28:06+02:00 Europe/Paris
